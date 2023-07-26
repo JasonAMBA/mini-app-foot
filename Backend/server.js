@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
@@ -67,7 +68,7 @@ app.post('/login', (req, res) => {
         } else if (!match) {
           res.status(401).json({error: 'Mot de passe incorrect'});
         } else {
-          const token = jwt.sign({userId: user.id}, 'secret', {expiresIn: '1h'});
+          const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: '1h'});
 
           res.status(200).json({token});
         }
@@ -83,7 +84,7 @@ app.get('/national-teams', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid Token"});
@@ -110,7 +111,7 @@ app.get('/national-team/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid Token"});
@@ -135,7 +136,7 @@ app.post('/national-team', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -159,7 +160,7 @@ app.delete('/national-team/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -182,7 +183,7 @@ app.get('/clubs', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -208,7 +209,7 @@ app.get('/club/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"})
@@ -233,7 +234,7 @@ app.post('/clubs', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -257,7 +258,7 @@ app.delete('/club/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -280,7 +281,7 @@ app.get('/players', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -306,7 +307,7 @@ app.get('/player/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -334,7 +335,7 @@ app.post('/player', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
       } else {
@@ -358,7 +359,7 @@ app.delete('/player/:id', (req, res) => {
   if (!token) {
     res.status(401).json({error: "Authorization header missing"});
   } else {
-    jwt.verify(token, 'secret', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error(err);
         res.status(401).json({error: "Invalid token"});
@@ -375,6 +376,6 @@ app.delete('/player/:id', (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Serveur actif sur le port : ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Serveur actif sur le port : ${process.env.PORT}`);
 })
