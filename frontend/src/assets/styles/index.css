@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/days-one';
+
+* {
+  font-family: "Days One", sans-serif;
+}
+
+p {
+  @apply text-base;
+  @apply p-2;
+}
+
+label {
+  @apply p-2;
+}
+
+
+h1 {
+  @apply text-4xl font-bold;
+  @apply p-2;
+}
+
+h2 {
+  @apply text-3xl font-bold;
+  @apply p-2;
+}
+
+h3 {
+  @apply text-2xl font-bold;
+  @apply p-2;
+}
+
+h4 {
+  @apply text-xl font-bold;
+  @apply p-2;
+}
+
+h5 {
+  @apply text-lg font-bold;
+  @apply p-2;
+}
+
+h6 {
+  @apply text-base font-bold;
+  @apply p-2;
+}
+
+input[type="text"],
+input[type="password"] {
+  margin: 7px 0 7px;
+  border: 1px solid transparent;
+  height: 30px;
+  width: 70%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  padding-left: 10px;
+  transition: 0.2s;
+}
+
+input[type="submit"] {
+  border: none;
+  width: 50%;
+  margin: 12px auto 0;
+  padding: 10px;
+  border-radius: 150px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: white;
+}
+
+form{
+  min-width: 380px;
+  max-width: 600px;
+  display: grid;
+  grid-template-rows: repeat(3, 70px);
+  padding: 60px 45px 30px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 5px 5px 5px #0047FF;
+}
+
+.firstblue {
+  background-color: #0047FF;
+}
+
+.text-firstblue {
+  color: #0047FF;
+}
+
+.secondblue {
+  background-color: #0085FF;
+}
+
+.text-secondblue {
+  color: #0085FF;
+}
+
+.thirdblue {
+  background-color: #A4EFFF;
+}
+
+.text-thirdblue {
+  color: #A4EFFF;
+}
+
+.fourthblue {
+  background-color: #D6FFFD;
+}
+
+.text-fourthblue {
+  color: #D6FFFD;
+}
+
+button {
+  border-radius: 150px;
+  padding: 5px;
+  min-width: 7%;
+}
