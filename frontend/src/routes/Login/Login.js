@@ -1,10 +1,15 @@
 import React from "react";
+import Header from "./Header/Header";
+import Body from "./Body/Body";
+import Footer from "./Footer/Footer";
 
 function Login() {
   return (
-    <div>
-      <h1>Login</h1>
-    </div>
+    <>
+      <Header/>
+      <Body/>
+      <Footer/>
+    </>
   );
 }
 

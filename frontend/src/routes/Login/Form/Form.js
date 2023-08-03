@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Form() {
@@ -7,29 +7,29 @@ function Form() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const Register = async (event) => {
+  const Login = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3000/signup", {
+      const response = await axios.post("http://localhost:3000/login", {
         username, password
       });
 
-      console.log(response.data);
-      alert("inscription réussi !");
-      navigate("/login");
+      if (response.data && response.data.token) {
+        window.localStorage.setItem("appToken", response.data.token);
+        alert("Connexion réussi !");
+        navigate("/");
+      }
     } catch (error) {
       console.error("Une erreur s'est produite", error);
     }
-
-    
   };
 
-  return (
+  return(
     <div>
-      <form className="thirdblue" onSubmit={Register}>
+      <form onSubmit={Login} className="thirdblue">
         <div className="text-center">
-          <h2>Inscription</h2>
+          <h2>Connexion</h2>
         </div>
         <div className="text-center">
           <label> Nom d'utilisateur : </label>
@@ -39,10 +39,10 @@ function Form() {
           <label> Mot de passe : </label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <input className="text-center firstblue" type="submit" value="S'inscrire" />
+        <input className="text-center firstblue" type="submit" value="Connexion"/>
       </form>
     </div>
-  );
+  )
 }
 
 export default Form;
