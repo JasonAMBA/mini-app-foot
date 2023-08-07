@@ -11,7 +11,7 @@ function Header() {
         <Logout/>
       ) : (
         <>
-          <Link to="/signup"><button className="secondblue"><h5 className="text-white">Inscription</h5></button></Link>
+          <Link to="/signup"><button className="fifthblue"><h5 className="text-white">Inscription</h5></button></Link>
           <Link to="/login"><button className="secondblue"><h5 className="text-white">Connexion</h5></button></Link>
         </>
       )}

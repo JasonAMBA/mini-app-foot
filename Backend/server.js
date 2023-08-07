@@ -300,6 +300,32 @@ app.get('/players', (req, res) => {
   }
 });
 
+app.get('/players/:id', (req, res) => {
+  const token = req.headers.authorization;
+  const {id} = req.params;
+
+  if (!token) {
+    res.status(401).json({error: "Authorization header missing"});
+  } else {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        console.error(err);
+        res.status(401).json({error: "Invalid token"});
+      } else {
+        const query = "SELECT player.firstname, player.lastname, player.position, player.strong_foot, player.photo, club.name AS club, national_team.name AS national_team FROM player INNER JOIN club ON player.club_id = club.id INNER JOIN national_team ON player.national_team_id = national_team.id WHERE national_team_id = ?;";
+
+        db.query(query, [id], (err, results) => {
+          if (err) {
+            console.error("Erreur lors de l'éxécution de la requête", err);
+            res.status(500).send('Erreur lors de la récupération du joueur');
+          }
+          res.send(results);
+        });
+      }
+    });
+  }
+});
+
 app.get('/player/:id', (req, res) => {
   const token = req.headers.authorization;
   const {id} = req.params;
